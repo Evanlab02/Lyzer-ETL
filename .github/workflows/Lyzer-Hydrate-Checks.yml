@@ -28,8 +28,8 @@ jobs:
           pipenv install --dev
       - name: Lint and Docs Styling
         run: |
-          pipenv run flake8 app/ tests/ --max-line-length 100
-          pipenv run pydocstyle app/ tests/
+          pipenv run flake8 src/ tests/ --max-line-length 100
+          pipenv run pydocstyle src/ tests/
 
   Tests:
     runs-on: ubuntu-latest
@@ -65,6 +65,6 @@ jobs:
           pip install --upgrade pip
           pip install pipenv
           pipenv install
-      - name: Build docker image
+      - name: Build executable
         run: |
-          pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
+          pipenv run pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
