@@ -1,4 +1,4 @@
-name: Lyzer Hydrate Checks
+name: Lyzer ETL Checks
 
 on:
   pull_request:
@@ -67,4 +67,4 @@ jobs:
           pipenv install
       - name: Build executable
         run: |
-          pipenv run pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
+          pipenv run pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py

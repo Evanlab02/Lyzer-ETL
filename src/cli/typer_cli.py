@@ -1,4 +1,4 @@
-"""This module contains the typer CLI app and logic for the Lyzer-Hydrate application."""
+"""This module contains the typer CLI app and logic for the Lyzer-ETL application."""
 
 import typer
 

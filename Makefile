@@ -12,7 +12,7 @@ test:
 	pytest -v tests/ --cov=src/ --cov-report term-missing
 
 clean:
-	rm -rf .coverage .pytest_cache build/ dist/ Lyzer-Hydrate.spec
+	rm -rf .coverage .pytest_cache build/ dist/ Lyzer-ETL.spec
 
 build:
-	pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
+	pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py

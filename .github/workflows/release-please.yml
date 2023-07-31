@@ -17,7 +17,7 @@ jobs:
         id: release
         with:
           release-type: simple
-          package-name: Lyzer-Hydrate
+          package-name: Lyzer-ETL
       - uses: actions/checkout@v3
         if: ${{ steps.release.outputs.releases_created }}
         with:
@@ -36,10 +36,10 @@ jobs:
       - name: "Build Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
+          pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py
       - name: "Upload Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          gh release upload ${{ steps.release.outputs.tag_name }} dist/Lyzer-Hydrate
+          gh release upload ${{ steps.release.outputs.tag_name }} dist/Lyzer-ETL
         env:
           GITHUB_TOKEN: ${{ github.TOKEN }}
