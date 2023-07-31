@@ -14,6 +14,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: google-github-actions/release-please-action@v3
+        id: release
         with:
           release-type: simple
           package-name: Lyzer-Hydrate
+      - uses: actions/checkout@v3
+        if: ${{ steps.release.outputs.releases_created }}
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.10
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Setup
+        if: ${{ steps.release.outputs.releases_created }}
+        run: |
+          pip install --upgrade pip
+          pip install pipenv
+          pipenv install
+      - name: "Build Exe"
+        if: ${{ steps.release.outputs.releases_created }}
+        run: |
+          pyinstaller --onefile --name=Lyzer-Hydrate --clean --distpath=dist/ src/main.py
+      - name: "Upload Exe"
+        if: ${{ steps.release.outputs.releases_created }}
+        run: |
+          gh release upload ${{ steps.release.outputs.tag_name }} dist/Lyzer-Hydrate
+        env:
+          GITHUB_TOKEN: ${{ github.TOKEN }}
