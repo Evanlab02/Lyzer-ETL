@@ -1,0 +1,70 @@
+name: Lyzer ETL Checks
+
+on:
+  pull_request:
+    branches: [trunk]
+  push:
+    branches: [trunk]
+
+permissions:
+  contents: read
+
+jobs:
+  Code-Style:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Setup
+        run: |
+          pip install --upgrade pip
+          pip install pipenv
+          pipenv install --dev
+      - name: Lint and Docs Styling
+        run: |
+          pipenv run flake8 src/ tests/ --max-line-length 100
+          pipenv run pydocstyle src/ tests/
+
+  Tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Setup
+        run: |
+          pip install --upgrade pip
+          pip install pipenv
+          pipenv install --dev
+      - name: Testing
+        run: |
+          pipenv run pytest -v tests/ --cov=app/ --cov-report term-missing
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Setup
+        run: |
+          pip install --upgrade pip
+          pip install pipenv
+          pipenv install
+      - name: Build executable
+        run: |
+          pipenv run pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py
