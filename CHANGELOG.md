@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.1.0...v0.1.1) (2023-08-01)
+
+
+### Bug Fixes
+
+* **Workflows:** Added pipenv to build step ([2f3266f](https://github.com/Evanlab02/Lyzer-ETL/commit/2f3266f854c4039c082e7766c4db809c64524ff9))
+
 ## 0.1.0 (2023-08-01)
 
 
