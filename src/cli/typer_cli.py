@@ -2,8 +2,8 @@
 
 import typer
 
-from src.api.ergast_service import hello_ergast_service
-from src.api.github_service import hello_github_service
+from api.ergast_service import hello_ergast_service
+from api.github_service import hello_github_service
 
 app = typer.Typer()
 
