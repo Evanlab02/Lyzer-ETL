@@ -15,4 +15,10 @@ clean:
 	rm -rf .coverage .pytest_cache build/ dist/ Lyzer-ETL.spec
 
 build:
-	pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py
+	pyinstaller \
+	--onefile \
+	--name=Lyzer-ETL \
+	--clean \
+	--distpath=dist/ \
+	--add-data "version.txt:." \
+	main.py

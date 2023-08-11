@@ -67,4 +67,4 @@ jobs:
           pipenv install
       - name: Build executable
         run: |
-          pipenv run pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ src/main.py
+          pipenv run pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ main.py

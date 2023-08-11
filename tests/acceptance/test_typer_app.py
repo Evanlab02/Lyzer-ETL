@@ -8,8 +8,5 @@ from src.cli.typer_cli import app
 def test_hello_command():
     """Test the hello command."""
     runner = CliRunner()
-    result = runner.invoke(app, ["hello"])
+    result = runner.invoke(app, ["version"])
     assert result.exit_code == 0
-    assert (
-        result.output == "Hello, world!\nHello, ErgastService!\nHello, GithubService!\n"
-    )

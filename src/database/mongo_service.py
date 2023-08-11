@@ -35,8 +35,9 @@ class MongoService:
         """Print "Goodbye, world!" to the console."""
         print("Goodbye, world!")
 
-    def test_connection(self, connection_uri:str) -> bool:
-        """Tests validity of connection uri given by user
+    def test_connection(self, connection_uri: str) -> bool:
+        """
+        Tests validity of connection uri given by user.
 
         Args:
             connection_string (str): Mongo uri given by user
@@ -46,10 +47,13 @@ class MongoService:
         """
         client = MongoClient(connection_uri)
         try:
-            client.admin.command('ping')
+            client.admin.command("ping")
             print("Pinged your deployment. Connection string entered is valid.")
-        except Exception as e:
-            print("Connection string invalid, please enter valid MongoDB connection uri.")
+        except Exception as error:
+            print(
+                "Connection string invalid, please enter valid MongoDB connection uri."
+            )
+            print(error)
             return False
-        
+
         return True
