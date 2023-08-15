@@ -28,8 +28,8 @@ jobs:
           pipenv install --dev
       - name: Lint and Docs Styling
         run: |
-          pipenv run flake8 src/ tests/ --max-line-length 100
-          pipenv run pydocstyle src/ tests/
+          pipenv run flake8 main.py src/ tests/ --max-line-length 100
+          pipenv run pydocstyle main.py src/ tests/
 
   Tests:
     runs-on: ubuntu-latest
@@ -46,9 +46,15 @@ jobs:
           pip install --upgrade pip
           pip install pipenv
           pipenv install --dev
+      - name: Pull Mongo Docker
+        run: |
+          docker pull mongo:latest
+      - name: Run Mongo Docker
+        run: |
+          docker run -d -p 27017:27017 mongo:latest
       - name: Testing
         run: |
-          pipenv run pytest -v tests/ --cov=app/ --cov-report term-missing
+          pipenv run pytest -v tests/ --cov=src/ --cov-report term-missing
 
   build:
     runs-on: ubuntu-latest
