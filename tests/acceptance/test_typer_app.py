@@ -3,13 +3,18 @@
 from typer.testing import CliRunner
 
 from src.cli.typer_cli import app
+from src.helpers.utilities import read_version_file
 
 
-def test_hello_command():
-    """Test the hello command."""
+def test_version_command() -> None:
+    """
+    Test the version command.
+
+    This will test the version command by running the command and checking the
+    output.
+    """
     runner = CliRunner()
-    result = runner.invoke(app, ["hello"])
+    result = runner.invoke(app, ["version"])
+    version = read_version_file()
+    assert result.output == f"Lyzer-ETL version {version}\n"
     assert result.exit_code == 0
-    assert (
-        result.output == "Hello, world!\nHello, ErgastService!\nHello, GithubService!\n"
-    )
