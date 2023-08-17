@@ -12,6 +12,7 @@ Functions:
 import json
 import os
 from os import path
+import sys
 
 # Local Imports
 from src.database.mongo_service import MongoService
@@ -31,6 +32,7 @@ def setup_app() -> None:
     """
     if not (os.path.exists(CONFIG_FILE)):
         create_config()
+        sys.exit(0)
 
 
 def create_config() -> None:
@@ -39,13 +41,16 @@ def create_config() -> None:
 
     This function will create the config file and ask the user for the mongo connection string.
     """
-    os.makedirs(CONFIG_DIRECTORY)
+    if not (os.path.exists(CONFIG_DIRECTORY)):
+        os.makedirs(CONFIG_DIRECTORY)
+
     config = {}
 
     valid = False
     while not valid:
         connection_uri = input("Enter your mongo connection string: ")
-        valid = MongoService().test_connection(connection_uri)
+        service = MongoService(connection_string=connection_uri)
+        valid = service.test_connection()
 
     config.update({"mongoUri": connection_uri})
     config.update({"lastChecked": ""})
@@ -61,8 +66,11 @@ def read_config() -> dict | list:
     Returns:
         dict | list: the config file as a dictionary.
     """
-    with open(CONFIG_FILE, "r", encoding="UTF-8") as config:
-        return json.load(config)
+    try:
+        with open(CONFIG_FILE, "r", encoding="UTF-8") as config:
+            return json.load(config)
+    except FileNotFoundError:
+        setup_app()
 
 
 def write_config(config: dict | list) -> None:

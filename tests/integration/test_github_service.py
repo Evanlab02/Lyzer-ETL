@@ -29,8 +29,9 @@ def test_get_release_data_invalid_repo() -> None:
     Test the get_release_data function with an invalid repo.
     """
     github_service = GithubService({}, "")
-    github_service.github_url = \
+    github_service.github_url = (
         "https://api.github.com/repos/Evanlab02/random-why-would-i-do-this/releases"
+    )
 
     with pytest.raises(GithubRequestError):
         github_service.get_release_data()

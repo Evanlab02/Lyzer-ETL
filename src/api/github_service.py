@@ -5,6 +5,7 @@ The GithubService class is responsible for all interactions with the Github API.
 """
 
 # System imports
+import sys
 from datetime import datetime
 
 # Third-party imports
@@ -194,3 +195,4 @@ class GithubService:
             rich_print(f"\nFind updated file at '{download_asset_directory}'.")
             rich_print("Please overwrite your existing executable.")
             rich_print("[green]Update Complete.[/green]")
+            sys.exit(0)

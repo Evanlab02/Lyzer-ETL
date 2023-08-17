@@ -8,7 +8,7 @@ from rich import print as rich_print
 
 # Local imports
 from src.api.github_service import GithubService
-from src.config.configuration import setup_app, read_config
+from src.config.configuration import read_config
 from src.cli.typer_cli import app
 from src.helpers.utilities import read_version_file, update_now
 
@@ -21,8 +21,6 @@ def main() -> None:
     responsible for setting up the application, updating it if necessary, and
     running the CLI.
     """
-    setup_app()
-
     if argv[0] != "main.py":
         update()
     else:
