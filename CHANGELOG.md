@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.0](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.1.1...v0.2.0) (2023-08-17)
+
+
+### Features
+
+* **Auto-Update:** Executable will now try its best to encourage users to update by downloading the latest release. ([5dce6e7](https://github.com/Evanlab02/Lyzer-ETL/commit/5dce6e79aad50214e91f99026bcced847494e6d0))
+* **Commands:** Added new update command. ([5dce6e7](https://github.com/Evanlab02/Lyzer-ETL/commit/5dce6e79aad50214e91f99026bcced847494e6d0))
+
 ## [0.1.1](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.1.0...v0.1.1) (2023-08-01)
 
 
