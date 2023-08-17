@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.2.0...v0.2.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* **Auto-Update:** Fixed issue where version would not be read from included data ([f432dd4](https://github.com/Evanlab02/Lyzer-ETL/commit/f432dd415c65fbacb623df948c6f25edcd62f8f9))
+
 ## [0.2.0](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.1.1...v0.2.0) (2023-08-17)
 
 
