@@ -11,6 +11,10 @@ import sys
 
 from datetime import datetime
 
+from rich.table import Table
+
+from src.models.schedules import Schedule
+
 
 def read_version_file():
     """
@@ -54,3 +58,51 @@ def validate_year(year: int, allow_future: bool = False):
 
     if year not in range(min_year, max_year + 1):
         raise ValueError(f"Year must be between {min_year} and {max_year}.")
+
+
+def generate_schedules_table(schedules: list[Schedule]) -> Table:
+    """
+    Generate a schedules table.
+
+    Args:
+        schedules (list[Schedule]): List of schedules.
+
+    Returns:
+        Table: A schedules table.
+    """
+    headers = [
+        "Round",
+        "Race",
+        "Race date",
+        "Race time",
+        "Qualifying date",
+        "Qualifying time",
+        "Sprint date",
+        "Sprint time",
+    ]
+
+    table = Table(title="Schedules", show_header=True, header_style="bold magenta")
+
+    for header in headers:
+        table.add_column(header)
+
+    for schedule in schedules:
+        qualifying_date = schedule.Qualifying.Date if schedule.Qualifying else "None"
+        qualifying_time = schedule.Qualifying.Time if schedule.Qualifying else "None"
+        sprint_date = schedule.Sprint.Date if schedule.Sprint else "None"
+        sprint_time = schedule.Sprint.Time if schedule.Sprint else "None"
+
+        data = (
+            schedule.Round,
+            schedule.RaceName,
+            schedule.Date,
+            schedule.Time if schedule.Time else "None",
+            qualifying_date,
+            qualifying_time,
+            sprint_date,
+            sprint_time,
+        )
+
+        table.add_row(*data)
+
+    return table

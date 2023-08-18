@@ -42,7 +42,7 @@ class Schedule(BaseModel):
         Sprint (Session): The sprint session.
     """
 
-    Round: int = Field(alias="round")
+    Round: str = Field(alias="round")
     RaceName: str = Field(alias="raceName")
     Date: str = Field(alias="date")
     Time: Optional[str] = Field(alias="time", default=None)
