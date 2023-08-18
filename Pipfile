@@ -10,6 +10,7 @@ pyinstaller = "==5.13.0"
 requests = "==2.31.0"
 wget = "==3.2"
 rich = "==13.5.2"
+pydantic = "==2.2.0"
 
 [dev-packages]
 black = "==23.7.0"

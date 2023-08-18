@@ -11,15 +11,14 @@ Functions:
 # Standard Library Imports
 import json
 import os
-from os import path
 
 # Local Imports
 from src.database.mongo_service import MongoService
 
 # Constants
-HOME_DIRECTORY = path.expanduser("~")
-CONFIG_DIRECTORY = path.join(HOME_DIRECTORY, ".lyzer")
-CONFIG_FILE = path.join(CONFIG_DIRECTORY, "config.json")
+HOME_DIRECTORY = os.path.expanduser("~")
+CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, ".lyzer")
+CONFIG_FILE = os.path.join(CONFIG_DIRECTORY, "config.json")
 
 
 def setup_app() -> None:
@@ -39,7 +38,9 @@ def create_config() -> None:
 
     This function will create the config file and ask the user for the mongo connection string.
     """
-    os.makedirs(CONFIG_DIRECTORY)
+    if not (os.path.exists(CONFIG_DIRECTORY)):
+        os.makedirs(CONFIG_DIRECTORY)
+
     config = {}
 
     valid = False

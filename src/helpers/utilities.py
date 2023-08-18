@@ -9,7 +9,7 @@ Functions:
 import os
 import sys
 
-from src.error.exceptions import GithubRequestError
+from datetime import datetime
 
 
 def read_version_file():
@@ -36,20 +36,21 @@ def read_version_file():
         return "0.0.0"
 
 
-def update_now(github_service):
+def validate_year(year: int, allow_future: bool = False):
     """
-    Update the application.
-
-    This function will update the application by calling the update_app method
-    from the GithubService class and handling any errors that may occur.
+    Validate a year.
 
     Args:
-        github_service (GithubService): The GithubService class.
+        year (int): The year to validate.
+        allow_future (bool, optional): Allow future year, one year ahead of
+            current year. Defaults to False.
 
     Raises:
-        GithubRequestError: Raised when a request to the Github API fails.
+        ValueError: If year is not between 1950 and current year or current year + 1.
     """
-    try:
-        github_service.update_app()
-    except GithubRequestError as error:
-        print(f"Github request failed with status code {error.status_code}.")
+    current_year = datetime.now().year
+    min_year = 1950
+    max_year = current_year + 1 if allow_future else 0
+
+    if year not in range(min_year, max_year + 1):
+        raise ValueError(f"Year must be between {min_year} and {max_year}.")

@@ -63,18 +63,9 @@ def test_process_release_data_should_return_new_release_patch():
     """
     github_service = GithubService({"lastChecked": ""}, "1.0.0")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v1.0.1"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v1.0.1"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) == {"tag_name": "v1.0.1"}
+    assert github_service.process_release_data(release_data) == {"tag_name": "v1.0.1"}
 
 
 def test_process_release_data_should_return_none_patch():
@@ -86,18 +77,9 @@ def test_process_release_data_should_return_none_patch():
     """
     github_service = GithubService({"lastChecked": ""}, "1.0.1")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v1.0.1"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v1.0.1"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) is None
+    assert github_service.process_release_data(release_data) is None
 
 
 def test_process_release_data_should_return_new_release_minor():
@@ -109,18 +91,9 @@ def test_process_release_data_should_return_new_release_minor():
     """
     github_service = GithubService({"lastChecked": ""}, "1.0.0")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v1.1.0"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v1.1.0"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) == {"tag_name": "v1.1.0"}
+    assert github_service.process_release_data(release_data) == {"tag_name": "v1.1.0"}
 
 
 def test_process_release_data_should_return_none_minor():
@@ -132,18 +105,9 @@ def test_process_release_data_should_return_none_minor():
     """
     github_service = GithubService({"lastChecked": ""}, "1.1.0")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v1.1.0"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v1.1.0"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) is None
+    assert github_service.process_release_data(release_data) is None
 
 
 def test_process_release_data_should_return_new_release_major():
@@ -155,18 +119,9 @@ def test_process_release_data_should_return_new_release_major():
     """
     github_service = GithubService({"lastChecked": ""}, "1.0.0")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v2.0.0"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v2.0.0"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) == {"tag_name": "v2.0.0"}
+    assert github_service.process_release_data(release_data) == {"tag_name": "v2.0.0"}
 
 
 def test_process_release_data_should_return_none_major():
@@ -178,15 +133,6 @@ def test_process_release_data_should_return_none_major():
     """
     github_service = GithubService({"lastChecked": ""}, "2.0.0")
 
-    release_data = [
-        {
-            "tag_name": "v1.0.0"
-        },
-        {
-            "tag_name": "v2.0.0"
-        }
-    ]
+    release_data = [{"tag_name": "v1.0.0"}, {"tag_name": "v2.0.0"}]
 
-    assert github_service.process_release_data(
-        release_data
-    ) is None
+    assert github_service.process_release_data(release_data) is None
