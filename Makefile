@@ -5,7 +5,7 @@ format:
 	black main.py src/
 
 lint:
-	flake8 main.py src/--max-line-length 100
+	flake8 main.py src/ --max-line-length 100
 	pydocstyle main.py src/
 
 clean:
