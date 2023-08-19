@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.2.1...v0.3.0) (2023-08-19)
+
+
+### Features
+
+* **Load:** Can now load schedules into Database ([aa8dc83](https://github.com/Evanlab02/Lyzer-ETL/commit/aa8dc8392535b71a1872673529c2b77b750830d1))
+* **Table:** Will now print table when loading data for schedules ([0da0465](https://github.com/Evanlab02/Lyzer-ETL/commit/0da046510cf25f892cd7218b70c4c1ed2096bbe4))
+
 ## [0.2.1](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.2.0...v0.2.1) (2023-08-17)
 
 
