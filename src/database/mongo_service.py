@@ -4,8 +4,13 @@ This module contains the MongoService class.
 The MongoService class is responsible for all interactions with the MongoDB database.
 """
 
+from os import environ
+
 from pymongo import MongoClient
 from rich import print as rich_print
+from rich.console import Console
+
+from src.models.schedules import Schedule
 
 
 class MongoService:
@@ -27,9 +32,9 @@ class MongoService:
 
         This will create the MongoDB client, database, and collection.
         """
-        self.client = MongoClient("mongodb://localhost:27017/")
-        self.db = self.client["test"]
-        self.collection = self.db["test"]
+        connection_string = environ["mongoUri"]
+        self.console = Console()
+        self.client = MongoClient(connection_string)
 
     def test_connection(self, connection_uri: str) -> bool:
         """
@@ -41,12 +46,16 @@ class MongoService:
         Returns:
             bool: True if valid connection string.
         """
+        status = self.console.status("[bold green]Testing connection...")
+        status.start()
         try:
             client = MongoClient(connection_uri)
             client.admin.command("ping")
+            status.stop()
             rich_print("[green]Ping successful.[/green]")
             rich_print("[green]Connection string entered is valid.[/green]")
         except Exception as error:
+            status.stop()
             rich_print("[red]Ping unsuccessful.[/red]")
             rich_print("[red]Connection string entered is invalid.[/red]")
             rich_print(f"\n[red]Error: {error}[/red]\n")
@@ -54,3 +63,20 @@ class MongoService:
             return False
 
         return True
+
+    def insert_schedules(self, year: int, schedules: list[Schedule]):
+        """
+        Insert schedules into the database.
+
+        Args:
+            year (int): The year to insert schedules for.
+            schedules (list[Schedule]): The schedules to insert.
+
+        Returns:
+            None
+        """
+        database = self.client["Schedules"]
+        collection = database[str(year)]
+        collection.drop()
+        schedules = [schedule.model_dump() for schedule in schedules]
+        collection.insert_many(schedules)
