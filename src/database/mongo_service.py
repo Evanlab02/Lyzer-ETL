@@ -52,12 +52,13 @@ class MongoService:
             client = MongoClient(connection_uri)
             client.admin.command("ping")
             status.stop()
-            rich_print("[green]Ping successful.[/green]")
+            rich_print("\n[green]Ping successful.[/green]")
             rich_print("[green]Connection string entered is valid.[/green]")
         except Exception as error:
             status.stop()
-            rich_print("[red]Ping unsuccessful.[/red]")
-            rich_print("[red]Connection string entered is invalid.[/red]")
+            rich_print("\n[red]Ping unsuccessful.[/red]")
+            rich_print("[red]Connection string entered might be invalid.[/red]")
+            rich_print("[red]Please see error below.[/red]")
             rich_print(f"\n[red]Error: {error}[/red]\n")
             rich_print("[red]Please try again.[/red]")
             return False

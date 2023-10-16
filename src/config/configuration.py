@@ -11,6 +11,8 @@ Functions:
 # Standard Library Imports
 import json
 import os
+from datetime import datetime
+from rich import print as rich_print
 
 # Local Imports
 from src.database.mongo_service import MongoService
@@ -29,6 +31,7 @@ def setup_app() -> None:
     are present in the configuration file.
     """
     if not (os.path.exists(CONFIG_FILE)):
+        rich_print("[blue]Setting up config[/blue]")
         create_config()
 
 
@@ -41,18 +44,11 @@ def create_config() -> None:
     if not (os.path.exists(CONFIG_DIRECTORY)):
         os.makedirs(CONFIG_DIRECTORY)
 
-    config = {}
+    config = get_connection_string()
 
-    valid = False
-    while not valid:
-        connection_uri = input("Enter your mongo connection string: ")
-        valid = MongoService().test_connection(connection_uri)
+    config.update({"lastUpdated": ""})
 
-    config.update({"mongoUri": connection_uri})
-    config.update({"lastChecked": ""})
-
-    with open(CONFIG_FILE, "w+") as config_file:
-        json.dump(config, config_file, indent=4)
+    write_config(config=config)
 
 
 def read_config() -> dict | list:
@@ -74,4 +70,30 @@ def write_config(config: dict | list) -> None:
         config (dict | list): the config file as a dictionary.
     """
     with open(CONFIG_FILE, "w+", encoding="UTF-8") as config_file:
+        rich_print("\n[blue]Updating config file...[/blue]")
+        config["lastUpdated"] = str(datetime.now())
         json.dump(config, config_file, indent=4)
+        rich_print("\n[green]Config file update[/green]")
+
+
+def get_connection_string(config: dict | list = {}) -> dict | list:
+    """Get the mongo connection string from user.
+
+    Args:
+        config (dict | list, optional): Config to update or write to. Defaults to {}.
+
+    Returns:
+        dict | list: Updated config or new config populated with Mongo URI
+    """
+    valid = False
+
+    while not valid:
+        connection_uri = input("\nEnter your mongo connection string: ")
+        valid = MongoService().test_connection(connection_uri)
+
+    if len(config.keys()) == 0:
+        config.update({"mongoUri": connection_uri})
+    else:
+        config["mongoUri"] = connection_uri
+
+    return config

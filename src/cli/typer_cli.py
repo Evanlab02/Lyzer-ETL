@@ -13,7 +13,7 @@ from rich import print as rich_print
 # Local Imports
 from src.api.github_service import GithubService
 from src.cli.load_cli import load_app
-from src.config.configuration import read_config
+from src.config.configuration import read_config, get_connection_string, write_config
 from src.helpers.utilities import read_version_file
 
 app = typer.Typer(pretty_exceptions_show_locals=False)
@@ -43,4 +43,35 @@ def version() -> None:
 
     This will read the version file and print the version of the application.
     """
-    rich_print(f"Lyzer-ETL version {app_version}")
+    version = read_version_file()
+    rich_print(f"Lyzer-ETL version {version}")
+
+
+@app.command()
+def config() -> None:
+    """
+    Give the user the option to rewrite their config Mongo Connection URI.
+
+    If they select yes, they will be able to rewrite their URI.
+    """
+    config = read_config()
+    connection_uri = config["mongoUri"]
+    rich_print(
+        f"\nYour current Mongo Connection String is: [green]{connection_uri}[/green]"
+    )
+
+    options = ["y", "yes", "n", "no"]
+
+    while True:
+        option = (
+            input("\nWould you like to update your connection string? (y/n): ")
+            .strip()
+            .lower()
+        )
+
+        if option in options:
+            break
+
+    if option == "y" or option == "yes":
+        config = get_connection_string(config)
+        write_config(config)
