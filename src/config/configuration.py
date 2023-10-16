@@ -19,9 +19,9 @@ from rich import print as rich_print
 from src.database.mongo_service import MongoService
 
 # Constants
-HOME_DIRECTORY = path.expanduser("~")
-CONFIG_DIRECTORY = path.join(HOME_DIRECTORY, ".lyzer")
-CONFIG_FILE = path.join(CONFIG_DIRECTORY, "config.json")
+HOME_DIRECTORY = os.path.expanduser("~")
+CONFIG_DIRECTORY = os.path.join(HOME_DIRECTORY, ".lyzer")
+CONFIG_FILE = os.path.join(CONFIG_DIRECTORY, "config.json")
 
 
 def setup_app() -> None:
