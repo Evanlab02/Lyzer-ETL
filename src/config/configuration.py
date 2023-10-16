@@ -11,7 +11,6 @@ Functions:
 # Standard Library Imports
 import json
 import os
-from os import path
 from datetime import datetime
 from rich import print as rich_print
 
@@ -44,7 +43,7 @@ def create_config() -> None:
     """
     if not (os.path.exists(CONFIG_DIRECTORY)):
         os.makedirs(CONFIG_DIRECTORY)
-    
+
     config = get_connection_string()
 
     config.update({"lastUpdated": ""})
@@ -78,7 +77,7 @@ def write_config(config: dict | list) -> None:
 
 
 def get_connection_string(config: dict | list = {}) -> dict | list:
-    """Gets the mongo connection string from user
+    """Get the mongo connection string from user.
 
     Args:
         config (dict | list, optional): Config to update or write to. Defaults to {}.
@@ -96,5 +95,5 @@ def get_connection_string(config: dict | list = {}) -> dict | list:
         config.update({"mongoUri": connection_uri})
     else:
         config["mongoUri"] = connection_uri
-    
+
     return config

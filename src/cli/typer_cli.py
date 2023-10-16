@@ -50,22 +50,28 @@ def version() -> None:
 @app.command()
 def config() -> None:
     """
-    Gives the user the option to rewrite their config Mongo Connection URI
+    Give the user the option to rewrite their config Mongo Connection URI.
 
-    If they select yes, they will be able to rewrite their URI
+    If they select yes, they will be able to rewrite their URI.
     """
     config = read_config()
     connection_uri = config["mongoUri"]
-    rich_print(f"\nYour current Mongo Connection String is: [green]{connection_uri}[/green]")
+    rich_print(
+        f"\nYour current Mongo Connection String is: [green]{connection_uri}[/green]"
+    )
 
     options = ["y", "yes", "n", "no"]
-    
+
     while True:
-        option = input("\nWould you like to update your connection string? (y/n): ").strip().lower()
+        option = (
+            input("\nWould you like to update your connection string? (y/n): ")
+            .strip()
+            .lower()
+        )
 
         if option in options:
             break
-    
+
     if option == "y" or option == "yes":
         config = get_connection_string(config)
         write_config(config)
