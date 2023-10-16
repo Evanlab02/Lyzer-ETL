@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.3.0...v0.4.0) (2023-10-16)
+
+
+### Features
+
+* Added config command and working ([52fbb1a](https://github.com/Evanlab02/Lyzer-ETL/commit/52fbb1a06fec20f1c992f995d033e8673f43d1f8))
+
 ## [0.3.0](https://github.com/Evanlab02/Lyzer-ETL/compare/v0.2.1...v0.3.0) (2023-08-19)
 
 
