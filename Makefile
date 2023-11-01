@@ -1,5 +1,8 @@
+.PHONY: requirements format lint clean build
+
 requirements:
-	pipenv requirements --dev > requirements.txt
+	pipenv requirements > requirements.txt
+	pipenv requirements --dev > dev-requirements.txt
 
 format:
 	black main.py src/

@@ -73,7 +73,7 @@ def write_config(config: dict | list) -> None:
         rich_print("\n[blue]Updating config file...[/blue]")
         config["lastUpdated"] = str(datetime.now())
         json.dump(config, config_file, indent=4)
-        rich_print("\n[green]Config file update[/green]")
+        rich_print("\n[green]Config file updated[/green]")
 
 
 def get_connection_string(config: dict | list = {}) -> dict | list:
@@ -89,6 +89,7 @@ def get_connection_string(config: dict | list = {}) -> dict | list:
 
     while not valid:
         connection_uri = input("\nEnter your mongo connection string: ")
+        os.environ["mongoUri"] = connection_uri
         valid = MongoService().test_connection(connection_uri)
 
     if len(config.keys()) == 0:

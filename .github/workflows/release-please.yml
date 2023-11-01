@@ -30,13 +30,11 @@ jobs:
       - name: Setup
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          pip install --upgrade pip
-          pip install pipenv
-          pipenv install
+          pip install -r requirements.txt
       - name: "Build Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          pipenv run pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ --add-data "version.txt:." main.py
+          pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ --add-data "version.txt:." main.py
       - name: "Upload Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
