@@ -1,3 +1,5 @@
+.PHONY: requirements format lint clean build
+
 requirements:
 	pipenv requirements --dev > requirements.txt
 

@@ -33,8 +33,8 @@ class MongoService:
         This will create the MongoDB client, database, and collection.
         """
         connection_string = environ["mongoUri"]
-        self.console = Console()
         self.client = MongoClient(connection_string)
+        self.console = Console()
 
     def test_connection(self, connection_uri: str) -> bool:
         """
