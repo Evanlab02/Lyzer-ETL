@@ -41,7 +41,7 @@ jobs:
           python-version: "3.10"
       - name: Setup
         run: |
-          pip install -r dev-requirements.txt
+          pip install -r requirements.txt
       - name: Build executable
         run: |
           pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ --add-data "version.txt:." main.py
