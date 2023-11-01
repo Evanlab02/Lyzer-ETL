@@ -34,7 +34,7 @@ jobs:
       - name: "Build Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
-          python -m pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ --add-data "version.txt:." main.py
+          pyinstaller --onefile --name=Lyzer-ETL --clean --distpath=dist/ --add-data "version.txt:." main.py
       - name: "Upload Exe"
         if: ${{ steps.release.outputs.releases_created }}
         run: |
